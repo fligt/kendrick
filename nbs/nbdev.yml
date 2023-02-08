@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "kendrick"
+  site-url: "https://fligt.github.io/kendrick"
+  description: "Towards automating Kendrick mass plots"
+  repo-branch: master
+  repo-url: "https://github.com/fligt/kendrick"
