@@ -2,5 +2,5 @@ website:
   sidebar:
     contents:
       - index.ipynb
-      - 00_core.ipynb
-      - 10_automating-Kendrick-mass-plots-from-Thermo-raw-files.ipynb
+      - 00_converting-thermo-raw-files.ipynb
+      - 10_chemistry.ipynb

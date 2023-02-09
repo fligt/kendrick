@@ -11,8 +11,10 @@ samples. Visualization of the resulting data in so-called Kendrick mass
 plots provides a means to efficiently explore this type of data.
 
 Creating these plots with Excel is tedious and prone to error. Aim of
-the `kendrick` Python package is to facilitate the automatic creation of
-Kendrick mass plots from our raw data. Our aim is to make this open
-source package available soon. This code is developed out in the open.
-If you can’t wait, you already can take a look at our documentation and
-notebooks.
+the `kendrick` Python package is to enable the automatic creation of
+Kendrick mass plots from raw data. This open source package is developed
+out in the open and will be made available for installation as soon as
+possible.
+
+If you are curious and can’t wait for a pip installable package, take a
+look at our documentation and notebooks.
