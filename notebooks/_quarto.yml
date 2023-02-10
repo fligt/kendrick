@@ -19,5 +19,11 @@ website:
         href: "https://github.com/fligt/kendrick"
   sidebar:
     style: floating
+    contents:
+      - auto: "/*.ipynb"
+      - section: Theory
+        contents: theory/*
+      - section: Conversion
+        contents: conversion/*
 
-metadata-files: [nbdev.yml, sidebar.yml]
+metadata-files: [nbdev.yml]
