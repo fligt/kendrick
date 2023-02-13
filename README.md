@@ -10,8 +10,8 @@ analysis technique seems well suited to analyze complex polymeric
 samples. Visualization of the resulting data in so-called Kendrick mass
 plots provides a means to efficiently explore this type of data.
 
-Creating these plots with Excel is tedious and prone to error. Aim of
-the `kendrick` Python package is to enable the automatic creation of
+Creating these plots with Excel is tedious and prone to error. Objective
+of the `kendrick` Python package is to enable the automatic creation of
 Kendrick mass plots from raw data. This open source package is developed
 out in the open and will be made available for installation as soon as
 possible.
