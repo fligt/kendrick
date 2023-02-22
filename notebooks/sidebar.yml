@@ -3,4 +3,6 @@ website:
     contents:
       - index.ipynb
       - 00_converting-thermo-raw-files.ipynb
+      - 05_libraries.ipynb
       - 10_chemistry.ipynb
+      - 20_plotting.ipynb
