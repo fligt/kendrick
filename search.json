@@ -1,0 +1,86 @@
+[
+  {
+    "objectID": "plotting.html",
+    "href": "plotting.html",
+    "title": "Plotting",
+    "section": "",
+    "text": "According to the Quarto documentation, it should be straightforward to create interactive plots. For a start, let’s simply copy their code examples.\nSee: https://quarto.org/docs/interactive/widgets/jupyter.html\n\nfrom ipyleaflet import Map, Marker, basemaps, basemap_to_tiles\nm = Map(\n  basemap=basemap_to_tiles(\n    basemaps.NASAGIBS.ModisTerraTrueColorCR, \"2017-04-08\"\n  ),\n  center=(52.204793, 360.121558),\n  zoom=4\n)\nm.add_layer(Marker(location=(52.204793, 360.121558)))\nm\n\n\n\n\nMm, there seem to be issues. Not sure if they are related to Quarto or nbdev2\nSee: https://forums.fast.ai/t/nbdev-v2-jupyter-widgets/98259/3\nAnd also: https://github.com/quarto-dev/quarto-cli/issues/2445"
+  },
+  {
+    "objectID": "libraries.html",
+    "href": "libraries.html",
+    "title": "Python for High Resolution Mass Spectrometry",
+    "section": "",
+    "text": "Learn to code, code to learn.\nAn initial search for python packages to analyze high resolution mass spectrometry data, I found a few that seem rather useful. I will quickly explore them below."
+  },
+  {
+    "objectID": "libraries.html#molmass",
+    "href": "libraries.html#molmass",
+    "title": "Python for High Resolution Mass Spectrometry",
+    "section": "molmass",
+    "text": "molmass\nThe molmass package can be installed from the Python package index: https://pypi.org/project/molmass/.\n\n\n\n\n\n\nWarning\n\n\n\nThe latest version of molmass requires Python version 3.8.\n\n\n\nimport molmass \nimport numpy as np \nimport pandas as pd \nimport sys\n\nYou can check your version of a package with the .__version__ attribute. The latest version is ‘2022.12.9’.\n\nprint(sys.version)\n\n3.9.16 (main, Dec  8 2022, 11:01:53) \n[GCC 11.3.0]\n\n\n\nprint(molmass.__version__)\n\n2023.4.10\n\n\nLet’s explore the properties of caffeine as detailed in the code example.\n\nfrom molmass import Formula\nf = Formula('C8H10N4O2')  # Caffeine\nf\n\nFormula('C8H10N4O2')\n\n\nAnd look up the average, nominal and monoisotopic mass.\n\nf.mass  # average mass\n\n194.19095199999998\n\n\n\nf.nominal_mass  # == f.isotope.massnumber in previous package version\n\n194\n\n\n\nf.monoisotopic_mass  # == f.isotope.mass in previous package version\n\n194.08037557916\n\n\n\nf.composition().dataframe()\n\n\n\n\n\n\n\n\nCount\nRelative mass\nFraction\n\n\nElement\n\n\n\n\n\n\n\nC\n8\n96.085920\n0.494801\n\n\nH\n10\n10.079410\n0.051905\n\n\nN\n4\n56.026812\n0.288514\n\n\nO\n2\n31.998810\n0.164780\n\n\n\n\n\n\n\nNext, let’s compute the mass spectrum for caffeine for all the different isotope combinations.\n\ndf = f.spectrum().dataframe()\ndf\n\n\n\n\n\n\n\n\nRelative mass\nFraction\nIntensity %\nm/z\n\n\nMass number\n\n\n\n\n\n\n\n\n194\n194.080376\n8.988278e-01\n1.000000e+02\n194.080376\n\n\n195\n195.082873\n9.262511e-02\n1.030510e+01\n195.082873\n\n\n196\n196.084968\n8.021964e-03\n8.924917e-01\n196.084968\n\n\n197\n197.087214\n5.004776e-04\n5.568114e-02\n197.087214\n\n\n198\n198.089410\n2.370420e-05\n2.637235e-03\n198.089410\n\n\n199\n199.091577\n9.094718e-07\n1.011842e-04\n199.091577\n\n\n200\n200.093769\n2.738857e-08\n3.047143e-06\n200.093769\n\n\n201\n201.095939\n6.190814e-10\n6.887653e-08\n201.095939\n\n\n202\n202.098016\n1.031659e-11\n1.147783e-09\n202.098016\n\n\n203\n203.099952\n1.265261e-13\n1.407679e-11\n203.099952\n\n\n204\n204.101915\n1.092906e-15\n1.215924e-13\n204.101915\n\n\n205\n205.104365\n4.529557e-18\n5.039404e-16\n205.104365\n\n\n\n\n\n\n\nLet’s plot the the mass spectrum…\n\nimport matplotlib.pyplot as plt\n\n\n\nCode\nfig, ax = plt.subplots()\nax.scatter(df['Relative mass'], df['Fraction'])\nax.set_xlabel('Monoisotopic mass (u)')\nax.set_ylabel('Mass fraction')\nax.set_title('Caffeine mass spectrum');\n\n\n\n\n\nHere is also the mass spectrum for the different isotopes of iron.\n\nFe = Formula('Fe')\n\n\nFe.spectrum().dataframe()\n\n\n\n\n\n\n\n\nRelative mass\nFraction\nIntensity %\nm/z\n\n\nMass number\n\n\n\n\n\n\n\n\n54\n53.939609\n0.05845\n6.370294\n53.939609\n\n\n56\n55.934936\n0.91754\n100.000000\n55.934936\n\n\n57\n56.935393\n0.02119\n2.309436\n56.935393\n\n\n58\n57.933274\n0.00282\n0.307344\n57.933274\n\n\n\n\n\n\n\n\nCH2 = Formula('CH2')\nCH2.monoisotopic_mass\n\n14.01565006446"
+  },
+  {
+    "objectID": "libraries.html#pyhrms",
+    "href": "libraries.html#pyhrms",
+    "title": "Python for High Resolution Mass Spectrometry",
+    "section": "pyhrms",
+    "text": "pyhrms\nNeed to look into this.\nSee: https://pypi.org/project/pyhrms/"
+  },
+  {
+    "objectID": "libraries.html#pymzml",
+    "href": "libraries.html#pymzml",
+    "title": "Python for High Resolution Mass Spectrometry",
+    "section": "pymzml",
+    "text": "pymzml\nNeed to look into this.\nSee: https://pypi.org/project/pymzml/\nThis seems to be an important package. Here is the documentation: https://pymzml.readthedocs.io/en/latest/"
+  },
+  {
+    "objectID": "converting-thermo-raw-files.html",
+    "href": "converting-thermo-raw-files.html",
+    "title": "Converting Thermo raw files",
+    "section": "",
+    "text": "First things first. Reliable conversion of Thermo .raw files into open standard formats.\nSearching for existing solutions to read and convert Thermo raw files I found some interesting solutions."
+  },
+  {
+    "objectID": "converting-thermo-raw-files.html#rawquant",
+    "href": "converting-thermo-raw-files.html#rawquant",
+    "title": "Converting Thermo raw files",
+    "section": "RawQuant",
+    "text": "RawQuant\nhttps://github.com/kevinkovalchik/RawQuant and RawTools (based on .NET)"
+  },
+  {
+    "objectID": "converting-thermo-raw-files.html#componics-thermorawfileparser",
+    "href": "converting-thermo-raw-files.html#componics-thermorawfileparser",
+    "title": "Converting Thermo raw files",
+    "section": "Componics ThermoRawFileParser",
+    "text": "Componics ThermoRawFileParser\nRequires Mono on Linux, should work out of the box in Windows.\nhttps://www.ncbi.nlm.nih.gov/pmc/articles/PMC7116465/\nhttps://github.com/compomics/ThermoRawFileParser\nhttps://github.com/compomics/ThermoRawFileParser/releases"
+  },
+  {
+    "objectID": "converting-thermo-raw-files.html#uva-patroon",
+    "href": "converting-thermo-raw-files.html#uva-patroon",
+    "title": "Converting Thermo raw files",
+    "section": "UvA patRoon",
+    "text": "UvA patRoon\nHere is an R code repository for MS data processing by Rick Helmus from University of Amsterdam. Included are functions for converting vendor specific formats to mzML.\nhttps://rickhelmus.github.io/patRoon/"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to kendrick",
+    "section": "",
+    "text": "Our lab, the Rijkserfgoedlaboratorium in Amsterdam, currently experiments with direct ionization coupled with high resolution mass spectrometry using Thermo ASAP probe and Orbitrap HRMS. This chemical analysis technique seems well suited to analyze complex polymeric samples. Visualization of the resulting data in so-called Kendrick mass plots provides a means to efficiently explore this type of data.\nCreating these plots with Excel is tedious and prone to error. Objective of the kendrick Python package is to enable the automatic creation of Kendrick mass plots from raw data. This open source package is developed out in the open and will be made available for installation as soon as possible.\nIf you are curious and can’t wait for a pip installable package, take a look at our documentation and notebooks."
+  },
+  {
+    "objectID": "chemistry.html",
+    "href": "chemistry.html",
+    "title": "About the Kendrick mass defect",
+    "section": "",
+    "text": "Before we can create Kendrick plots we need to understand exactly how to calculate Kendrick mass and Kendrick mass defects for a given molecule. Let’s start with the Wikipedia pages on mass spectrometry and monoisotopic mass. Being a physicist I must confess I wasn’t aware of the multitude of mass definitions that need to be carefully distinguished. Also, I wasn’t aware that different definitions of mass defect are being used in physics and chemistry.\nReason for this difference between physics and chemistry seems to be that within nuclear physics it is necessary to distinguish between the mass of proton versus neutrons. Within chemistry this distinction would unnecessarily complicate the analysis. Instead, a premise of chemical mass spectrometry is that both protons and neutrons carry a similar mass of 1/12th of the weight of a carbon atom.\nTo my understanding the terms exact mass and monoisotopic mass are equivalent.\nLet’s check how we can calculate the expected up the nominal mass and the exact mass for given monomer with the mendeleev python package."
+  },
+  {
+    "objectID": "chemistry.html#kendrick-mass-and-kendrick-mass-defect",
+    "href": "chemistry.html#kendrick-mass-and-kendrick-mass-defect",
+    "title": "About the Kendrick mass defect",
+    "section": "Kendrick mass and Kendrick mass defect",
+    "text": "Kendrick mass and Kendrick mass defect\nAccording to wikipedia the Kendrick mass for a family of compounds \\(F\\) is given by\n\\[ \\mathrm{Kendrick~mass}~(F) = (\\mathrm{observed~mass}) \\times \\frac{\\mathrm{nominal~mass~(F)}}{\\mathrm{exact~mass~(F)}}.\\]\n\nFor hydrocarbon analysis, \\(F = \\mathrm{CH_2}\\).\n\nThis is not very clear.\nAs a numerical example, suppose we measure the hypothetical molecule \\(\\mathrm{C_2H_4}\\). The exact (or mono-isotopic) mass would be 28.03130012892 u.\nThe exact mass for the Kendrick monomer unit \\(\\mathrm{CH_2}\\) is 14.01565006446 u. This means the the exact Kendrick mass is\n\\[ (28.03130012892) \\times \\frac{14}{14.01565006446 } = 28~ \\mathrm{Kendrick~mass~units} \\].\nThe Kendrick mass defect of a specific measured molecular mass is the fractional part of the Kendrick Mass. Alternatively, it is the difference between the precise Kendrick mass and the nominal Kendrick mass.\nThe exact (or monoisotopic) mass of each chemical element deviates from the nominal mass that one would expect based on the number of nucleons (protons plus neutrons) present in the nucleus. This deviation is unique for each type of atom or molecule and is called the mass defect…\nFurther introduction is given by (Fouquet 2019)."
+  }
+]
