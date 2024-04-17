@@ -5,4 +5,9 @@ d = { 'settings': { 'branch': 'master',
                 'doc_host': 'https://fligt.github.io',
                 'git_url': 'https://github.com/fligt/kendrick',
                 'lib_path': 'kendrick'},
-  'syms': {'kendrick.core': {'kendrick.core.foo': ('core.html#foo', 'kendrick/core.py')}}}
+  'syms': { 'kendrick.core': {'kendrick.core.foo': ('core.html#foo', 'kendrick/core.py')},
+            'kendrick.explore': { 'kendrick.explore.get_time_averaged_centroids': ( 'exploring.html#get_time_averaged_centroids',
+                                                                                    'kendrick/explore.py'),
+                                  'kendrick.explore.histogram': ('exploring.html#histogram', 'kendrick/explore.py'),
+                                  'kendrick.explore.interactive_plot': ('exploring.html#interactive_plot', 'kendrick/explore.py'),
+                                  'kendrick.explore.read_mzml': ('exploring.html#read_mzml', 'kendrick/explore.py')}}}
