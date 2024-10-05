@@ -5,7 +5,7 @@
 # %% auto 0
 __all__ = ['read_mzml', 'histogram', 'get_time_averaged_centroids', 'interactive_plot']
 
-# %% ../notebooks/10_exploring.ipynb 15
+# %% ../notebooks/10_exploring.ipynb 16
 import pyopenms as oms 
 import dask.array as da 
 import scipy.signal as ssg 
@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 
 from functools import partial  
 
-# %% ../notebooks/10_exploring.ipynb 16
+# %% ../notebooks/10_exploring.ipynb 17
 def read_mzml(mzml_file): 
     '''Read `mzml_file`. 
     
