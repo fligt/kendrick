@@ -1,0 +1,21 @@
+2024-10-08 13:14:02.084 +02:00 [INF] Program started with arguments: -f /home/frank/Work/DATA/kendrick-data/Ref0443_casein_asap01.RAW -o /tmp/tmpcx89e7r5 -asd
+2024-10-08 13:14:02.231 +02:00 [INF] Files to be processed, provided as list: /home/frank/Work/DATA/kendrick-data/Ref0443_casein_asap01.RAW
+2024-10-08 13:14:02.269 +02:00 [INF] Extracting scan indices
+2024-10-08 13:14:02.398 +02:00 [INF] Extracting method/instrument information
+2024-10-08 13:14:02.513 +02:00 [INF] Extracting trailer extras
+2024-10-08 13:14:02.519 +02:00 [INF] Extracting precursor masses
+2024-10-08 13:14:02.520 +02:00 [INF] Extracting retention times
+2024-10-08 13:15:17.495 +02:00 [INF] Program started with arguments: -f /home/frank/Work/DATA/kendrick-data/Ref0443_casein_asap01.RAW -o /tmp/tmplw0u5ctk -asd
+2024-10-08 13:15:17.580 +02:00 [INF] Files to be processed, provided as list: /home/frank/Work/DATA/kendrick-data/Ref0443_casein_asap01.RAW
+2024-10-08 13:15:17.608 +02:00 [INF] Extracting scan indices
+2024-10-08 13:15:17.687 +02:00 [INF] Extracting method/instrument information
+2024-10-08 13:15:17.760 +02:00 [INF] Extracting trailer extras
+2024-10-08 13:15:17.764 +02:00 [INF] Extracting precursor masses
+2024-10-08 13:15:17.764 +02:00 [INF] Extracting retention times
+2024-10-08 13:26:04.195 +02:00 [INF] Program started with arguments: -f /home/frank/Work/DATA/kendrick-data/Ref0443_casein_asap01.RAW -o /tmp/tmp16g2f19u -asd
+2024-10-08 13:26:04.281 +02:00 [INF] Files to be processed, provided as list: /home/frank/Work/DATA/kendrick-data/Ref0443_casein_asap01.RAW
+2024-10-08 13:26:04.309 +02:00 [INF] Extracting scan indices
+2024-10-08 13:26:04.392 +02:00 [INF] Extracting method/instrument information
+2024-10-08 13:26:04.467 +02:00 [INF] Extracting trailer extras
+2024-10-08 13:26:04.471 +02:00 [INF] Extracting precursor masses
+2024-10-08 13:26:04.471 +02:00 [INF] Extracting retention times

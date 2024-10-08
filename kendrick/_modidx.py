@@ -10,4 +10,5 @@ d = { 'settings': { 'branch': 'master',
                                                                                     'kendrick/explore.py'),
                                   'kendrick.explore.histogram': ('exploring.html#histogram', 'kendrick/explore.py'),
                                   'kendrick.explore.interactive_plot': ('exploring.html#interactive_plot', 'kendrick/explore.py'),
-                                  'kendrick.explore.read_mzml': ('exploring.html#read_mzml', 'kendrick/explore.py')}}}
+                                  'kendrick.explore.read_mzml': ('exploring.html#read_mzml', 'kendrick/explore.py'),
+                                  'kendrick.explore.read_raw': ('exploring.html#read_raw', 'kendrick/explore.py')}}}
