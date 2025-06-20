@@ -20,4 +20,4 @@ If you are curious and can’t wait for a pip installable package, take a
 look at our [documentation](https://fligt.github.io/kendrick/) and
 [notebooks](https://github.com/fligt/kendrick/tree/master/notebooks).
 
-Last updated: 2024-10-05
+Last updated: 2025-06-20
