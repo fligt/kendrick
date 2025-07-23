@@ -85,6 +85,7 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+.jupyter 
 
 # pyenv
 .python-version
@@ -149,3 +150,6 @@ checklink/cookies.txt
 
 # Quarto
 .quarto
+
+
+

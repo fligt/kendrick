@@ -19,3 +19,10 @@
 2024-10-08 13:26:04.467 +02:00 [INF] Extracting trailer extras
 2024-10-08 13:26:04.471 +02:00 [INF] Extracting precursor masses
 2024-10-08 13:26:04.471 +02:00 [INF] Extracting retention times
+2025-07-23 15:50:36.452 +02:00 [INF] Program started with arguments: -f ../downloads/kendrick-data/Ref0443_casein_asap01.RAW -o /tmp/tmp5ojcp0mp -asd
+2025-07-23 15:50:36.825 +02:00 [INF] Files to be processed, provided as list: /media/frank/lonpersonal/dev/kendrick/notebooks/../downloads/kendrick-data/Ref0443_casein_asap01.RAW
+2025-07-23 15:50:36.879 +02:00 [INF] Extracting scan indices
+2025-07-23 15:50:37.019 +02:00 [INF] Extracting method/instrument information
+2025-07-23 15:50:37.187 +02:00 [INF] Extracting trailer extras
+2025-07-23 15:50:37.190 +02:00 [INF] Extracting precursor masses
+2025-07-23 15:50:37.190 +02:00 [INF] Extracting retention times
