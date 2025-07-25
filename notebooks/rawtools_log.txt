@@ -26,3 +26,10 @@
 2025-07-23 15:50:37.187 +02:00 [INF] Extracting trailer extras
 2025-07-23 15:50:37.190 +02:00 [INF] Extracting precursor masses
 2025-07-23 15:50:37.190 +02:00 [INF] Extracting retention times
+2025-07-25 16:22:01.372 +02:00 [INF] Program started with arguments: -f /home/frank/.cache/fairdatanow/asap-data/demo-data/Ref0443_casein_asap01.RAW -o /tmp/tmps6tnvhtp -asd
+2025-07-25 16:22:01.523 +02:00 [INF] Files to be processed, provided as list: /home/frank/.cache/fairdatanow/asap-data/demo-data/Ref0443_casein_asap01.RAW
+2025-07-25 16:22:01.558 +02:00 [INF] Extracting scan indices
+2025-07-25 16:22:01.701 +02:00 [INF] Extracting method/instrument information
+2025-07-25 16:22:01.782 +02:00 [INF] Extracting trailer extras
+2025-07-25 16:22:01.786 +02:00 [INF] Extracting precursor masses
+2025-07-25 16:22:01.786 +02:00 [INF] Extracting retention times

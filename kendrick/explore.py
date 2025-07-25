@@ -5,7 +5,7 @@
 # %% auto 0
 __all__ = ['read_raw', 'read_mzml', 'histogram', 'get_time_averaged_centroids', 'interactive_plot']
 
-# %% ../notebooks/05_exploring.ipynb 18
+# %% ../notebooks/05_exploring.ipynb 28
 import pyRawTools as rwt 
 import dask.array as da 
 import scipy.signal as ssg 
@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 
 from functools import partial  
 
-# %% ../notebooks/05_exploring.ipynb 19
+# %% ../notebooks/05_exploring.ipynb 29
 def read_raw(raw_file): 
     '''Read `raw_file` into positive and negative mode data frames. '''
 
