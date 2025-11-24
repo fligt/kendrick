@@ -5,7 +5,7 @@
 # %% auto 0
 __all__ = ['read_raw', 'read_mzml', 'histogram', 'get_time_averaged_centroids', 'interactive_plot']
 
-# %% ../notebooks/05_exploring.ipynb 28
+# %% ../notebooks/05_exploring.ipynb 33
 import pyRawTools as rwt 
 import dask.array as da 
 import scipy.signal as ssg 
@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 
 from functools import partial  
 
-# %% ../notebooks/05_exploring.ipynb 29
+# %% ../notebooks/05_exploring.ipynb 34
 def read_raw(raw_file): 
     '''Read `raw_file` into positive and negative mode data frames. '''
 
@@ -88,7 +88,7 @@ def get_time_averaged_centroids(mz_hist_w_xy):
     
     return mz_centroids  
 
-def interactive_plot(df, mz_hist, mz_centroids): 
+def interactive_plot(df, mz_hist, mz_centroids, title=None): 
     '''Create interactive plot for dataframe `df`. '''
 
     mz_hist_x, mz_hist_y = mz_hist.T
@@ -114,7 +114,8 @@ def interactive_plot(df, mz_hist, mz_centroids):
     ymin, ymax = ax1.get_ylim()
     ax1.vlines(mz_centroids_x, ymin=ymin, ymax=ymax, color=[0.9, 0.9, 0.9], zorder=-10)
     ax1.set_ylabel('RT')
-    ax1.set_title('Ref0443_casein_asap01.mzML (+)')
+    if title != None: 
+        ax1.set_title(title)
     
     # intensity weighed histogram 
     ax2.plot(mz_hist_x, mz_hist_y, color='r')
