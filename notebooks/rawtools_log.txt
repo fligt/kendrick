@@ -61,3 +61,10 @@
 2025-11-26 15:39:55.634 +01:00 [INF] Extracting trailer extras
 2025-11-26 15:39:55.637 +01:00 [INF] Extracting precursor masses
 2025-11-26 15:39:55.638 +01:00 [INF] Extracting retention times
+2025-11-27 09:13:00.257 +01:00 [INF] Program started with arguments: -f /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Joana_100-24-1_01.RAW -o /tmp/tmpt27mx3mq -asd
+2025-11-27 09:13:00.355 +01:00 [INF] Files to be processed, provided as list: /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Joana_100-24-1_01.RAW
+2025-11-27 09:13:00.372 +01:00 [INF] Extracting scan indices
+2025-11-27 09:13:00.502 +01:00 [INF] Extracting method/instrument information
+2025-11-27 09:13:00.556 +01:00 [INF] Extracting trailer extras
+2025-11-27 09:13:00.559 +01:00 [INF] Extracting precursor masses
+2025-11-27 09:13:00.559 +01:00 [INF] Extracting retention times
