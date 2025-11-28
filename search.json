@@ -1,0 +1,152 @@
+[
+  {
+    "objectID": "getting-started.html",
+    "href": "getting-started.html",
+    "title": "Getting started with Python",
+    "section": "",
+    "text": "In order to make full use of kendrick you need to be able to install Python packages and run Python code in Jupyter notebooks on your computer. The quickest and easiest way to get started with Jupyter notebooks is by downloading and installing the JupyterLab Desktop (JLD) installer for your operating system from the official github repository.\n\n\n\n\n\n\n\nNote\n\n\n\nThe first time you start JupyterLab Desktop you additionally need to install the default Python environment from the start menu. To do so you need to hoover and click on the word ‘install’ on the bottom of the start up screen.\n\n\nAre you running Jupyterlab Desktop on Linux or MacOS? In that case you also need to install mono via your package manager! For installation details see: pyRawTools.\nFinally you can install or update (with the -U option) the kendrick package from the Python Package index pypi.org by executing this command in a jupyter terminal:\npip install -U kendrick \nFor more information about JupyterLab Desktop see the JLD user guide.\nThat is it! You now are ready to open up your explore your high resolution mass spectrometry data!",
+    "crumbs": [
+      "Getting started with Python"
+    ]
+  },
+  {
+    "objectID": "libraries.html",
+    "href": "libraries.html",
+    "title": "Python for High Resolution Mass Spectrometry",
+    "section": "",
+    "text": "Learn to code, code to learn.\nAn initial search for python packages to analyze high resolution mass spectrometry data, I found a few that seem rather useful. I will quickly explore them below.",
+    "crumbs": [
+      "Python for High Resolution Mass Spectrometry"
+    ]
+  },
+  {
+    "objectID": "libraries.html#molmass",
+    "href": "libraries.html#molmass",
+    "title": "Python for High Resolution Mass Spectrometry",
+    "section": "molmass",
+    "text": "molmass\nThe molmass package can be installed from the Python package index: https://pypi.org/project/molmass/.\n\n\n\n\n\n\nWarning\n\n\n\nThe latest version of molmass requires Python version 3.8.\n\n\n\nimport molmass \nimport numpy as np \nimport pandas as pd \nimport sys\n\nYou can check your version of a package with the .__version__ attribute. The latest version is ‘2022.12.9’.\n\nprint(sys.version)\n\n3.10.19 (main, Oct 10 2025, 01:01:37) [GCC 13.3.0]\n\n\n\nprint(molmass.__version__)\n\n2025.4.14\n\n\nLet’s explore the properties of caffeine as detailed in the code example.\n\nfrom molmass import Formula\nf = Formula('C8H10N4O2')  # Caffeine\nf\n\nFormula('C8H10N4O2')\n\n\nAnd look up the average, nominal and monoisotopic mass.\n\nf.mass  # average mass\n\n194.19095199999998\n\n\n\nf.nominal_mass  # == f.isotope.massnumber in previous package version\n\n194\n\n\n\nf.monoisotopic_mass  # == f.isotope.mass in previous package version\n\n194.08037557916\n\n\n\nf.composition().dataframe()\n\n\n\n\n\n\n\n\nCount\nRelative mass\nFraction\n\n\nElement\n\n\n\n\n\n\n\nC\n8\n96.085920\n0.494801\n\n\nH\n10\n10.079410\n0.051905\n\n\nN\n4\n56.026812\n0.288514\n\n\nO\n2\n31.998810\n0.164780\n\n\n\n\n\n\n\nNext, let’s compute the mass spectrum for caffeine for all the different isotope combinations.\n\ndf = f.spectrum().dataframe()\ndf\n\n\n\n\n\n\n\n\nRelative mass\nFraction\nIntensity %\nm/z\n\n\nMass number\n\n\n\n\n\n\n\n\n194\n194.080376\n8.988278e-01\n1.000000e+02\n194.080376\n\n\n195\n195.082873\n9.262511e-02\n1.030510e+01\n195.082873\n\n\n196\n196.084968\n8.021964e-03\n8.924917e-01\n196.084968\n\n\n197\n197.087214\n5.004776e-04\n5.568114e-02\n197.087214\n\n\n198\n198.089410\n2.370420e-05\n2.637235e-03\n198.089410\n\n\n199\n199.091577\n9.094718e-07\n1.011842e-04\n199.091577\n\n\n200\n200.093769\n2.738857e-08\n3.047143e-06\n200.093769\n\n\n201\n201.095939\n6.190814e-10\n6.887653e-08\n201.095939\n\n\n202\n202.098016\n1.031659e-11\n1.147783e-09\n202.098016\n\n\n203\n203.099952\n1.265261e-13\n1.407679e-11\n203.099952\n\n\n204\n204.101915\n1.092906e-15\n1.215924e-13\n204.101915\n\n\n205\n205.104365\n4.529557e-18\n5.039404e-16\n205.104365\n\n\n\n\n\n\n\nLet’s plot the the mass spectrum…\n\nimport matplotlib.pyplot as plt\n\n\n\nCode\nfig, ax = plt.subplots()\nax.scatter(df['Relative mass'], df['Fraction'])\nax.set_xlabel('Monoisotopic mass (u)')\nax.set_ylabel('Mass fraction')\nax.set_title('Caffeine mass spectrum');\n\n\n\n\n\n\n\n\n\nHere is also the mass spectrum for the different isotopes of iron.\n\nFe = Formula('Fe')\n\n\nFe.spectrum().dataframe()\n\n\n\n\n\n\n\n\nRelative mass\nFraction\nIntensity %\nm/z\n\n\nMass number\n\n\n\n\n\n\n\n\n54\n53.939609\n0.05845\n6.370294\n53.939609\n\n\n56\n55.934936\n0.91754\n100.000000\n55.934936\n\n\n57\n56.935393\n0.02119\n2.309436\n56.935393\n\n\n58\n57.933274\n0.00282\n0.307344\n57.933274\n\n\n\n\n\n\n\n\nCH2 = Formula('CH2')\nCH2.monoisotopic_mass\n\n14.01565006446",
+    "crumbs": [
+      "Python for High Resolution Mass Spectrometry"
+    ]
+  },
+  {
+    "objectID": "libraries.html#pyhrms",
+    "href": "libraries.html#pyhrms",
+    "title": "Python for High Resolution Mass Spectrometry",
+    "section": "pyhrms",
+    "text": "pyhrms\nNeed to look into this.\nSee: https://pypi.org/project/pyhrms/",
+    "crumbs": [
+      "Python for High Resolution Mass Spectrometry"
+    ]
+  },
+  {
+    "objectID": "libraries.html#pymzml",
+    "href": "libraries.html#pymzml",
+    "title": "Python for High Resolution Mass Spectrometry",
+    "section": "pymzml",
+    "text": "pymzml\nNeed to look into this.\nSee: https://pypi.org/project/pymzml/\nThis seems to be an important package. Here is the documentation: https://pymzml.readthedocs.io/en/latest/",
+    "crumbs": [
+      "Python for High Resolution Mass Spectrometry"
+    ]
+  },
+  {
+    "objectID": "high-resolution-mass-spectrometry.html",
+    "href": "high-resolution-mass-spectrometry.html",
+    "title": "High resolution mass spectrometry",
+    "section": "",
+    "text": "Given our ability to create high precision m/z values by time averaged centroiding, we should now be able to derive statistics and deduce the elemental composition of different ions in our data.\n\nfrom kendrick import read_mzml, histogram, get_time_averaged_centroids\n\n\nmzml_file = '/home/frank/Work/DATA/kendrick-data/Ref0443_casein_asap01.mzML' # TODO: create download function \ndf_pos, df_min = read_mzml(mzml_file)\n\nmz_hist = histogram(df_pos)\nmz_centroids = get_time_averaged_centroids(mz_hist)\n\n\nmz_x, mz_y = mz_centroids.T\n\nLet’s start by plotting this.\n\nimport matplotlib.pyplot as plt \nimport numpy as np\n\n\nfig, ax = plt.subplots()\nax.vlines(mz_x, ymin=np.zeros_like(mz_x), ymax=mz_y)\n\n\n\n\n\nidxs = np.argsort(mz_y)[::-1]\n\n\nmz_sorted = mz_centroids[idxs]\n\n\nmz_sorted\n\narray([[2.57247150e+02, 4.94319338e+09],\n       [2.29216050e+02, 1.46894206e+09],\n       [2.55233050e+02, 1.17589672e+09],\n       ...,\n       [1.60306550e+02, 4.08524079e+03],\n       [1.48418350e+02, 4.08524079e+03],\n       [1.31345550e+02, 4.08524079e+03]])\n\n\nFor now let’s pick the 10th mz value…\n\nmz10 = mz_sorted[10][0]\n\n\nmz10\n\n197.12845\n\n\nCan we use molmass or pyopenms to deduce the elemental composition?\n\nimport molmass as mm\n\nThis is the latest version\n\nmm.__version__\n\n'2023.8.30'\n\n\n\nf = mm.Formula('CH2')\n\n\nf.spectrum().dataframe()\n\n\n\n\n\n\n\n\nRelative mass\nFraction\nIntensity %\nm/z\n\n\nMass number\n\n\n\n\n\n\n\n\n14\n14.015650\n9.890725e-01\n1.000000e+02\n14.015650\n\n\n15\n15.019066\n1.092505e-02\n1.104575e+00\n15.019066\n\n\n16\n16.025297\n2.473800e-06\n2.501132e-04\n16.025297\n\n\n17\n17.031558\n1.415075e-10\n1.430709e-08\n17.031558\n\n\n\n\n\n\n\nLet’s generate a bunch of elemental compositions…\n\nimport numpy as np\n\n\npositions = np.indices([2, 2, 2]).T.reshape(-1, 3)\npositions\n\narray([[0, 0, 0],\n       [1, 0, 0],\n       [0, 1, 0],\n       [1, 1, 0],\n       [0, 0, 1],\n       [1, 0, 1],\n       [0, 1, 1],\n       [1, 1, 1]])\n\n\n\ndef formula(pos):  \n    n1, n2, n3 = pos \n    formula_str = 'C'\n\n\nformula_list = [] \nelements = ['C', 'H', 'O']\nfor p in positions: \n    formula = ''\n    for i, n in enumerate(p): \n        if n == 0: \n            elem_str = ''\n        elif n == 1: \n            elem_str = elements[i]\n        else: \n            elem_str = f'{elements[i]}{n}'\n        formula = formula + elem_str\n    \n    formula_list.append(formula)\n\n\nformula_list\n\n['', 'C', 'H', 'CH', 'O', 'CO', 'HO', 'CHO']\n\n\n\n'C' * 0 + 'H' * 2\n\n'HH'\n\n\n\nelements np.unique(np.array(list('CHH')), return_counts=True)))\n\n[(array(['C', 'H'], dtype='&lt;U1'),), (array([1, 2]),)]\n\n\n\nunique, counts\n\n(array(['C', 'H'], dtype='&lt;U1'), array([1, 2]))",
+    "crumbs": [
+      "High resolution mass spectrometry"
+    ]
+  },
+  {
+    "objectID": "kendrick-mass-defect.html",
+    "href": "kendrick-mass-defect.html",
+    "title": "The Kendrick mass defect",
+    "section": "",
+    "text": "Before we can create Kendrick plots we need to understand exactly how to calculate Kendrick mass and Kendrick mass defects for a given molecule. Let’s start with the Wikipedia pages on mass spectrometry and monoisotopic mass. Being a physicist I must confess I wasn’t aware of the multitude of mass definitions that need to be carefully distinguished. Also, I wasn’t aware that different definitions of mass defect are being used in physics and chemistry.\nReason for this difference between physics and chemistry seems to be that within nuclear physics it is necessary to distinguish between the mass of proton versus neutrons. Within chemistry this distinction would unnecessarily complicate the analysis. Instead, a premise of chemical mass spectrometry is that both protons and neutrons carry a similar mass of 1/12th of the weight of a carbon atom.\nTo my understanding the terms exact mass and monoisotopic mass are equivalent.\nLet’s check how we can calculate the expected up the nominal mass and the exact mass for given monomer with the mendeleev python package.",
+    "crumbs": [
+      "The Kendrick mass defect"
+    ]
+  },
+  {
+    "objectID": "kendrick-mass-defect.html#kendrick-mass-and-kendrick-mass-defect",
+    "href": "kendrick-mass-defect.html#kendrick-mass-and-kendrick-mass-defect",
+    "title": "The Kendrick mass defect",
+    "section": "Kendrick mass and Kendrick mass defect",
+    "text": "Kendrick mass and Kendrick mass defect\nAccording to wikipedia the Kendrick mass for a family of compounds \\(F\\) is given by\n\\[ \\mathrm{Kendrick~mass}~(F) = (\\mathrm{observed~mass}) \\times \\frac{\\mathrm{nominal~mass~(F)}}{\\mathrm{exact~mass~(F)}}.\\]\n\nFor hydrocarbon analysis, \\(F = \\mathrm{CH_2}\\).\n\nThis is not very clear.\nAs a numerical example, suppose we measure the hypothetical molecule \\(\\mathrm{C_2H_4}\\). The exact (or mono-isotopic) mass would be 28.03130012892 u.\nThe exact mass for the Kendrick monomer unit \\(\\mathrm{CH_2}\\) is 14.01565006446 u. This means the the exact Kendrick mass is\n\\[ (28.03130012892) \\times \\frac{14}{14.01565006446 } = 28~ \\mathrm{Kendrick~mass~units} \\].\nThe Kendrick mass defect of a specific measured molecular mass is the fractional part of the Kendrick Mass. Alternatively, it is the difference between the precise Kendrick mass and the nominal Kendrick mass.\nThe exact (or monoisotopic) mass of each chemical element deviates from the nominal mass that one would expect based on the number of nucleons (protons plus neutrons) present in the nucleus. This deviation is unique for each type of atom or molecule and is called the mass defect…\nFurther introduction is given by (Fouquet 2019).",
+    "crumbs": [
+      "The Kendrick mass defect"
+    ]
+  },
+  {
+    "objectID": "exploring.html",
+    "href": "exploring.html",
+    "title": "Exploring half a million molecules",
+    "section": "",
+    "text": "For our ASAP project research team we created a Nextcloud folder that we can use to easily share our data with fairdatanow Python package. Let’s take a look what Wim has uploaded so far…\n\nfrom fairdatanow import DataViewer\nimport os\n\n\n  \n\n\n\n\n\nconfiguration = {\n    'url': \"https://laboppad.nl/asap-data\",\n    'user':    os.getenv('NC_AUTH_USER'),\n    'password': os.getenv('NC_AUTH_PASS')\n}\n\n\ndv = DataViewer(configuration)\n\n\ndv\n\n\n\n\n\n  \n\n\n\n\n\n\n\nfairdatanow\n\n\nFor this example we want to download all .RAW files present in the folder containing the string lange the Nextcloud server to our local computer. As shown in the gif animation above. This can be done by first typing the filename and Enter key in the search bar, and subsequently selecting the .raw extension in the filters menu. We can now select all files in the table by clicking on the first row and shift-clicking on the last row. All blue files can be downloaded to your local computer using the method .download_selected()\n\nfiles = dv.download_selected()\n\nReady with downloading 2 selected remote files to local cache: /home/frank/.cache/fairdatanow                                                                                                                   \n\n\nThe list of downloaded files on your computer is stored in the files variable. Let’s take a look at the file paths in our local cache directory.\n\nprint('(Skipping first 35 items)')\nfor i, file in enumerate(files): \n    if i &gt; 35:\n        print(i, file)\n\n(Skipping first 35 items)\n36 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Joana_100-24-1_01.RAW\n37 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Joana_100-24-2_01.RAW\n38 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Joseba_01.RAW\n39 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Julia_T1_01.RAW\n40 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Julia_T2_01.RAW\n41 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Marina_MFH_A_01.RAW\n42 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Marina_MFH_B_01.RAW\n43 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Marina_MFH_C_01.RAW\n44 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Rosie_01.RAW\n45 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_A_(1920.95)_01.RAW\n46 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_B_(1970.80)_01.RAW\n47 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_C_(1901.50)_01.RAW\n48 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_Ref1_01.RAW\n49 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_Ref2_01.RAW\n50 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_Ref3_01.RAW\n51 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_Ref4_01.RAW\n52 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_Ref5_01.RAW\n53 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_Ref6_01.RAW\n54 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_Ref7_01.RAW\n\n\nIn order to avoid searching again, it is possible to save the complete search filter settings with the .export_filters() method.\n\nmy_filters = dv.export_filters()\nmy_filters\n\n{'columns': ['path', 'size', 'modified'],\n 'extensions': ['.raw'],\n 'search': 'lange',\n 'show_directories': False,\n 'show_filters': False,\n 'use_regex': False}\n\n\nThis dictionary of filters can next time be used to directly obtain the files list like so:\n\ndv = DataViewer(configuration, **myfilters)",
+    "crumbs": [
+      "Exploring half a million molecules"
+    ]
+  },
+  {
+    "objectID": "exploring.html#exploring-our-nextcloud-data",
+    "href": "exploring.html#exploring-our-nextcloud-data",
+    "title": "Exploring half a million molecules",
+    "section": "",
+    "text": "For our ASAP project research team we created a Nextcloud folder that we can use to easily share our data with fairdatanow Python package. Let’s take a look what Wim has uploaded so far…\n\nfrom fairdatanow import DataViewer\nimport os\n\n\n  \n\n\n\n\n\nconfiguration = {\n    'url': \"https://laboppad.nl/asap-data\",\n    'user':    os.getenv('NC_AUTH_USER'),\n    'password': os.getenv('NC_AUTH_PASS')\n}\n\n\ndv = DataViewer(configuration)\n\n\ndv\n\n\n\n\n\n  \n\n\n\n\n\n\n\nfairdatanow\n\n\nFor this example we want to download all .RAW files present in the folder containing the string lange the Nextcloud server to our local computer. As shown in the gif animation above. This can be done by first typing the filename and Enter key in the search bar, and subsequently selecting the .raw extension in the filters menu. We can now select all files in the table by clicking on the first row and shift-clicking on the last row. All blue files can be downloaded to your local computer using the method .download_selected()\n\nfiles = dv.download_selected()\n\nReady with downloading 2 selected remote files to local cache: /home/frank/.cache/fairdatanow                                                                                                                   \n\n\nThe list of downloaded files on your computer is stored in the files variable. Let’s take a look at the file paths in our local cache directory.\n\nprint('(Skipping first 35 items)')\nfor i, file in enumerate(files): \n    if i &gt; 35:\n        print(i, file)\n\n(Skipping first 35 items)\n36 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Joana_100-24-1_01.RAW\n37 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Joana_100-24-2_01.RAW\n38 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Joseba_01.RAW\n39 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Julia_T1_01.RAW\n40 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Julia_T2_01.RAW\n41 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Marina_MFH_A_01.RAW\n42 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Marina_MFH_B_01.RAW\n43 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Marina_MFH_C_01.RAW\n44 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Rosie_01.RAW\n45 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_A_(1920.95)_01.RAW\n46 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_B_(1970.80)_01.RAW\n47 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_C_(1901.50)_01.RAW\n48 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_Ref1_01.RAW\n49 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_Ref2_01.RAW\n50 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_Ref3_01.RAW\n51 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_Ref4_01.RAW\n52 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_Ref5_01.RAW\n53 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_Ref6_01.RAW\n54 /home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_WAM_Ref7_01.RAW\n\n\nIn order to avoid searching again, it is possible to save the complete search filter settings with the .export_filters() method.\n\nmy_filters = dv.export_filters()\nmy_filters\n\n{'columns': ['path', 'size', 'modified'],\n 'extensions': ['.raw'],\n 'search': 'lange',\n 'show_directories': False,\n 'show_filters': False,\n 'use_regex': False}\n\n\nThis dictionary of filters can next time be used to directly obtain the files list like so:\n\ndv = DataViewer(configuration, **myfilters)",
+    "crumbs": [
+      "Exploring half a million molecules"
+    ]
+  },
+  {
+    "objectID": "exploring.html#reading-our-first-.raw-file",
+    "href": "exploring.html#reading-our-first-.raw-file",
+    "title": "Exploring half a million molecules",
+    "section": "Reading our first .raw file",
+    "text": "Reading our first .raw file\nNice! We are now ready to actually explore the data. First step is to read an .raw file containing (already scan-centroided) ASAP-HRMS data. The data can be loaded into a positive and a negative mode dataframe as with the read_raw() function which returns two dataframes for positive and negative mode. This function is based on the pyRawTools python package. Let’s take a look at Matt_Joana_100-24-1_01.RAW.\n\nfrom kendrick import read_raw\n\n\nraw_file = files[36] # \nraw_file\n\n'/home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Joana_100-24-1_01.RAW'\n\n\n\ndf_pos, df_neg = read_raw(raw_file)\n\nLet’s focus on the positive mode data for now. Here is what the first and last rows of the dataframe looks like.\n\ndf_pos\n\n\n\n\n\n\n\n\nRT\nmz\ninty\n\n\nScan\n\n\n\n\n\n\n\n1\n0.00559\n91.039505\n9.846962e+04\n\n\n1\n0.00559\n91.057877\n4.731688e+04\n\n\n1\n0.00559\n93.037094\n1.971464e+05\n\n\n1\n0.00559\n93.070290\n4.869656e+05\n\n\n1\n0.00559\n94.065620\n8.750284e+04\n\n\n...\n...\n...\n...\n\n\n381\n3.00519\n607.520447\n9.569468e+05\n\n\n381\n3.00519\n610.541321\n6.589495e+05\n\n\n381\n3.00519\n612.554993\n1.010656e+06\n\n\n381\n3.00519\n625.531311\n8.286563e+05\n\n\n381\n3.00519\n629.560425\n6.005925e+05\n\n\n\n\n151081 rows × 3 columns\n\n\n\nInspecting the df_pos dataframe we find 151018 rows with a Scan number index and three columns: 1) RT retention time, 2) mz mass per electrical charge, and 3) inty number of ions. From the first column one can see that this experiment lasted 3 minutes.\nAs we will see, m/z values for identical molecules are slightly jittered due to limited instrumental precision. In order to determine the abundance of different molecules present in the sample, we now need to create time averaged centroided m/z values. This can be achieved by 1) first binning the data in a histogram, 2) then Gaussian smoothing the histogram and locating the peaks. These steps are implemented in the functions histogram() and get_time_averaged_centroids().\nNext step is to explore the data in an interactive visualization. In order to plot half a million data points in a single plot we need to import a special function interactive_plot(). This function makes heavily use of a powerful python package datashader that is designed for fast plotting huge numbers of data points.\n\n\n\n\n\n\nNote\n\n\n\nNote that in order to activate interactive plotting in a Jupyter notebook you need to execute the following notebook magic command in a code cell: %matplotlib widget\n\n\n\nfrom kendrick import histogram, get_time_averaged_centroids, interactive_plot\n\n\nmz_hist = histogram(df_pos)\nmz_centroids = get_time_averaged_centroids(mz_hist)\n\ninteractive_plot(df_pos, mz_hist, mz_centroids, title='Matt_Joana_100-24-1_01.RAW (+)')",
+    "crumbs": [
+      "Exploring half a million molecules"
+    ]
+  },
+  {
+    "objectID": "exploring.html#functions",
+    "href": "exploring.html#functions",
+    "title": "Exploring half a million molecules",
+    "section": "FUNCTIONS",
+    "text": "FUNCTIONS\n\nsource\n\ninteractive_plot\n\n interactive_plot (df, mz_hist, mz_centroids, title=None)\n\nCreate interactive plot for dataframe df.\n\nsource\n\n\nget_time_averaged_centroids\n\n get_time_averaged_centroids (mz_hist_w_xy)\n\nGet peaks (centroids) from histogram.\n\nsource\n\n\nhistogram\n\n histogram (df)\n\nCreate intensity weighed histogram.\n\nsource\n\n\nread_mzml\n\n read_mzml (mzml_file)\n\n*Read mzml_file.\nReturns positive and negative mode dataframes df_pos and df_min.*\n\nsource\n\n\nread_raw\n\n read_raw (raw_file)\n\nRead raw_file into positive and negative mode data frames.",
+    "crumbs": [
+      "Exploring half a million molecules"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to kendrick",
+    "section": "",
+    "text": "Our lab, the Rijkserfgoedlaboratorium in Amsterdam, currently experiments with direct ionization coupled with high resolution mass spectrometry using Thermo ASAP probe and Orbitrap HRMS. This chemical analysis technique seems well suited to analyze complex polymeric samples. Visualization of the resulting data in so-called Kendrick mass plots provides a means to efficiently explore this type of data.\nCreating these plots with Excel is tedious and prone to error. Objective of the kendrick Python package is to enable the automatic creation of Kendrick mass plots from raw data. This open source package is developed out in the open and will be made available for installation as soon as possible.\nIf you are curious and can’t wait for a pip installable package, take a look at our documentation and notebooks.\nLast updated: 2025-06-20",
+    "crumbs": [
+      "Welcome to kendrick"
+    ]
+  },
+  {
+    "objectID": "centroiding-again.html",
+    "href": "centroiding-again.html",
+    "title": "Centroiding again",
+    "section": "",
+    "text": "In the previous section we explained how to read the data contained in the Thermo .RAW file into dataframes and explore them in an interactive plot. At the highest resolution it became clear that the individual data points during the three minutes scan scatter around the vertical gray lines located at the maxima of their corresponding peaks in the time integrated mass histogram shown in the lower part of the figure. Reason for this scattering is the limited instrumental precision of the mass spectrometer. In order to proceed with our analysis we essentially need to horizontally move all points that are located within the instrumental precision onto these vertical gray lines. Confusingly the raw data was already centroided within each individual scan during the measurement. And now by horizontally shifting the masses to these histogram maxima we centroid the data again!\nfrom kendrick import histogram, get_time_averaged_centroids, interactive_plot, read_raw, centralize\nraw_file = '/home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Joana_100-24-1_01.RAW'\ndf_pos, df_neg = read_raw(raw_file)\n\nmz_hist = histogram(df_pos)\nmz_centroids = get_time_averaged_centroids(mz_hist)\nTo create a new dataframe with mass points that are aligned to the centroid lines use the centralize() function.\ndf_centr = centralize(df_pos, mz_centroids)\nLet’s now inspect this centroided dataframe in interactive plot below.\ninteractive_plot(df_centr, mz_hist, mz_centroids, title='Centroided Matt_Joana_100-24-1_01.RAW (+)')\nAt low resolution this plot looks quite similar to the original data. However, when zooming in one can observe that the mass points are now perfectly aligned with the grey centroid lines. By doing so we have increased the mass resolution of our data which means that we are ready to create Kendrick plots in the next section!",
+    "crumbs": [
+      "Centroiding again"
+    ]
+  },
+  {
+    "objectID": "centroiding-again.html#functions",
+    "href": "centroiding-again.html#functions",
+    "title": "Centroiding again",
+    "section": "FUNCTIONS",
+    "text": "FUNCTIONS\n\n  \n\n\n\nsource\n\ncentralize\n\n centralize (df, mz_centroids, precision=0.002)\n\n*Shift mass points to centroid positions.\nKeep retention time dimension.*",
+    "crumbs": [
+      "Centroiding again"
+    ]
+  }
+]
