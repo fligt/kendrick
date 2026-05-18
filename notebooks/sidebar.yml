@@ -1,0 +1,10 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - 00_getting-started.ipynb
+      - 05_exploring.ipynb
+      - 07_centroiding-again.ipynb
+      - 10_libraries.ipynb
+      - 15_high-resolution-mass-spectrometry.ipynb
+      - 20_kendrick-mass-defect.ipynb
