@@ -294,36 +294,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="6eca2db7-e5de-493e-9259-62c9e7d31fdb" class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> kendrick <span class="im">import</span> compute_kendrick_mass_and_defect</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="9697e531-4691-4c69-b5fc-d3ec0244d133" class="cell">
+<div id="a929530b-1af5-42f2-87d0-38ad07333c2e" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mz_pos <span class="op">=</span> df_total_pos[<span class="st">'Centroided m/z'</span>].values </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>inty_pos <span class="op">=</span> df_total_pos[<span class="st">'Fractional intensity (%)'</span>]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>km_pos, kmd_pos <span class="op">=</span> compute_kendrick_mass_and_defect(mz_pos) </span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>mz_neg <span class="op">=</span> df_total_neg[<span class="st">'Centroided m/z'</span>].values </span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>inty_neg <span class="op">=</span> df_total_neg[<span class="st">'Fractional intensity (%)'</span>]</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>km_neg, kmd_neg <span class="op">=</span> compute_kendrick_mass_and_defect(mz_neg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="57894295-3a34-48e5-974e-0c4faf2ff329" class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>[<span class="dv">12</span>, <span class="dv">8</span>]) </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>thres_pos <span class="op">=</span> <span class="fl">0.0001</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>s_pos <span class="op">=</span> <span class="dv">500</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>thres_neg <span class="op">=</span> <span class="fl">0.0001</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>s_neg <span class="op">=</span> <span class="dv">800</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylim([<span class="op">-</span><span class="fl">0.05</span>, <span class="fl">0.6</span>])</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>ax.set_xlim([<span class="dv">0</span>, <span class="dv">1200</span>])</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>ax.scatter(km_neg[inty_neg <span class="op">&gt;</span> thres_neg], kmd_neg[inty_neg <span class="op">&gt;</span> thres_neg], s<span class="op">=</span>s_neg<span class="op">*</span>inty_neg[inty_neg <span class="op">&gt;</span> thres_neg], alpha<span class="op">=</span><span class="fl">0.8</span>, color<span class="op">=</span><span class="st">'royalblue'</span>, label<span class="op">=</span><span class="st">'negative mode (-)'</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>ax.scatter(km_pos[inty_pos <span class="op">&gt;</span> thres_pos], kmd_pos[inty_pos <span class="op">&gt;</span> thres_pos], s<span class="op">=</span>s_pos<span class="op">*</span>inty_pos[inty_pos <span class="op">&gt;</span> thres_pos], alpha<span class="op">=</span><span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'darkred'</span>, label<span class="op">=</span><span class="st">'positive mode (+)'</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Kendrick precise mass (KM)'</span>)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Kendrick mass defect (KMD)'</span>)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f'Kendrick plot for </span><span class="sc">{</span>os<span class="sc">.</span>path<span class="sc">.</span>basename(raw_file)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>ax.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>km_neg, kmd_neg <span class="op">=</span> compute_kendrick_mass_and_defect(mz_neg) </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>[<span class="dv">12</span>, <span class="dv">8</span>]) </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>thres_pos <span class="op">=</span> <span class="fl">0.0001</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>s_pos <span class="op">=</span> <span class="dv">500</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>thres_neg <span class="op">=</span> <span class="fl">0.0001</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>s_neg <span class="op">=</span> <span class="dv">800</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>ax.set_ylim([<span class="op">-</span><span class="fl">0.05</span>, <span class="fl">0.6</span>])</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>ax.set_xlim([<span class="dv">0</span>, <span class="dv">1200</span>])</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>ax.scatter(km_neg[inty_neg <span class="op">&gt;</span> thres_neg], kmd_neg[inty_neg <span class="op">&gt;</span> thres_neg], s<span class="op">=</span>s_neg<span class="op">*</span>inty_neg[inty_neg <span class="op">&gt;</span> thres_neg], alpha<span class="op">=</span><span class="fl">0.8</span>, color<span class="op">=</span><span class="st">'royalblue'</span>, label<span class="op">=</span><span class="st">'negative mode (-)'</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>ax.scatter(km_pos[inty_pos <span class="op">&gt;</span> thres_pos], kmd_pos[inty_pos <span class="op">&gt;</span> thres_pos], s<span class="op">=</span>s_pos<span class="op">*</span>inty_pos[inty_pos <span class="op">&gt;</span> thres_pos], alpha<span class="op">=</span><span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'darkred'</span>, label<span class="op">=</span><span class="st">'positive mode (+)'</span>)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Kendrick precise mass (KM)'</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Kendrick mass defect (KMD)'</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f'Kendrick plot for </span><span class="sc">{</span>os<span class="sc">.</span>path<span class="sc">.</span>basename(raw_file)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>ax.legend()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="08_plotting-kendrick-plots_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="08_plotting-kendrick-plots_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -335,11 +337,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><a href="https://github.com/fligt/kendrick/blob/master/kendrick/kendrick_plot.py#L17" target="_blank" style="float:right; font-size:smaller">source</a></p>
 <section id="compute_kendrick_mass_and_defect" class="level3">
 <h3 class="anchored" data-anchor-id="compute_kendrick_mass_and_defect">compute_kendrick_mass_and_defect</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_kendrick_mass_and_defect(</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    mz, monomer:<span class="bu">str</span><span class="op">=</span><span class="st">'CH2'</span>, offset:<span class="bu">float</span><span class="op">=</span><span class="fl">0.6</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>):</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_kendrick_mass_and_defect(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    mz, monomer:<span class="bu">str</span><span class="op">=</span><span class="st">'CH2'</span>, offset:<span class="bu">float</span><span class="op">=</span><span class="fl">0.6</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>):</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><em>Compute Kendrick precise mass for array <code>mz</code>. </em></p>
 <p>Default <code>monomer</code> is ‘CH2’.</p>
 <p>It is not clear to me why the offset by Wim is chosen 0.6.</p>
