@@ -11,4 +11,6 @@ d = { 'settings': { 'branch': 'master',
                                   'kendrick.explore.histogram': ('exploring.html#histogram', 'kendrick/explore.py'),
                                   'kendrick.explore.interactive_plot': ('exploring.html#interactive_plot', 'kendrick/explore.py'),
                                   'kendrick.explore.read_mzml': ('exploring.html#read_mzml', 'kendrick/explore.py'),
-                                  'kendrick.explore.read_raw': ('exploring.html#read_raw', 'kendrick/explore.py')}}}
+                                  'kendrick.explore.read_raw': ('exploring.html#read_raw', 'kendrick/explore.py')},
+            'kendrick.kendrick_plot': { 'kendrick.kendrick_plot.compute_kendrick_mass_and_defect': ( 'plotting-kendrick-plots.html#compute_kendrick_mass_and_defect',
+                                                                                                     'kendrick/kendrick_plot.py')}}}

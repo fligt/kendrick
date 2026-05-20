@@ -2,30 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://fligt.github.io/kendrick/index.html</loc>
-    <lastmod>2026-05-18T09:15:54.878Z</lastmod>
+    <lastmod>2026-05-20T12:05:06.453Z</lastmod>
   </url>
   <url>
     <loc>https://fligt.github.io/kendrick/high-resolution-mass-spectrometry.html</loc>
-    <lastmod>2026-05-18T09:15:54.879Z</lastmod>
+    <lastmod>2026-05-20T12:05:06.488Z</lastmod>
   </url>
   <url>
-    <loc>https://fligt.github.io/kendrick/centroiding-again.html</loc>
-    <lastmod>2026-05-18T09:48:45.468Z</lastmod>
-  </url>
-  <url>
-    <loc>https://fligt.github.io/kendrick/getting-started.html</loc>
-    <lastmod>2026-05-18T09:15:54.821Z</lastmod>
+    <loc>https://fligt.github.io/kendrick/plotting-kendrick-plots.html</loc>
+    <lastmod>2026-05-20T12:05:05.262Z</lastmod>
   </url>
   <url>
     <loc>https://fligt.github.io/kendrick/exploring.html</loc>
-    <lastmod>2026-05-18T09:48:44.772Z</lastmod>
+    <lastmod>2026-05-20T12:05:05.270Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fligt.github.io/kendrick/getting-started.html</loc>
+    <lastmod>2026-05-20T12:05:06.503Z</lastmod>
+  </url>
+  <url>
+    <loc>https://fligt.github.io/kendrick/centroiding-again.html</loc>
+    <lastmod>2026-05-20T12:05:06.318Z</lastmod>
   </url>
   <url>
     <loc>https://fligt.github.io/kendrick/libraries.html</loc>
-    <lastmod>2026-05-18T09:15:54.880Z</lastmod>
+    <lastmod>2026-05-20T12:05:06.502Z</lastmod>
   </url>
   <url>
     <loc>https://fligt.github.io/kendrick/kendrick-mass-defect.html</loc>
-    <lastmod>2026-05-18T09:15:54.822Z</lastmod>
+    <lastmod>2026-05-20T12:05:06.488Z</lastmod>
   </url>
 </urlset>

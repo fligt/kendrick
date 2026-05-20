@@ -20,33 +20,23 @@
     ]
   },
   {
-    "objectID": "centroiding-again.html",
-    "href": "centroiding-again.html",
-    "title": "Centroiding again",
+    "objectID": "plotting-kendrick-plots.html",
+    "href": "plotting-kendrick-plots.html",
+    "title": "Plotting Kendrick plots",
     "section": "",
-    "text": "In the previous section we explained how to read the data contained in the Thermo .RAW file into dataframes and explore them in an interactive plot. At the highest resolution it became clear that the individual data points during the three minutes scan scatter around the vertical gray lines located at the maxima of their corresponding peaks in the time integrated mass histogram shown in the lower part of the figure. Reason for this scattering is the limited instrumental precision of the mass spectrometer. In order to proceed with our analysis we essentially need to horizontally move all points that are located within the instrumental precision onto these vertical gray lines. Confusingly the raw data was already centroided within each individual scan during the measurement. And now by horizontally shifting the masses to these histogram maxima we centroid the data again!\nfrom kendrick import histogram, get_time_averaged_centroids, interactive_plot, read_raw, centralize\nraw_file = '/home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Joana_100-24-1_01.RAW'\ndf_pos, df_neg = read_raw(raw_file)\n\nmz_hist = histogram(df_pos)\nmz_centroids = get_time_averaged_centroids(mz_hist)\nTo create a new dataframe with mass points that are aligned to the centroid lines use the centralize() function.\ndf_centr = centralize(df_pos, mz_centroids)\nLet’s now inspect this centroided dataframe in interactive plot below.\ninteractive_plot(df_centr, mz_hist, mz_centroids, title='Centroided Matt_Joana_100-24-1_01.RAW (+)')\nAt low resolution this plot looks quite similar to the original data. However, when zooming in one can observe that the mass points are now perfectly aligned with the grey centroid lines. By doing so we have increased the mass resolution of our data which means that we are ready to create Kendrick plots in the next section.",
+    "text": "Let’s see if we can now explore the mass spectral data in our cached raw file. However, before creating a Kendrick plot let’s take a look at the (centroided and time integrated) positive and negative mode mass spectra. This can be done conveniently with a bit of matplotlib code.\nfrom kendrick import read_raw, centralize \nimport matplotlib.pyplot as plt\nimport os \nimport numpy as np\nCode\nraw_file = '/home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Joana_100-24-1_01.RAW'\n\ndf_pos, df_neg = read_raw(raw_file) \ndf_total_pos = centralize(df_pos)\ndf_total_neg = centralize(df_neg)\n\nfig, ax =plt.subplots(figsize=[12, 8])\n\nxlabel, ylabel = df_total_pos.columns\nx_pos, y_pos = df_total_pos.values.T\nx_neg, y_neg = df_total_neg.values.T\ntitle = f'{os.path.basename(raw_file)}'\n\nax.vlines(x_pos, np.zeros_like(y_pos), y_pos, color='firebrick', label='positive mode (+)')\nax.vlines(x_neg, -y_neg, np.zeros_like(y_neg), color='royalblue', label='negative mode (-)')\nax.set_xlabel(xlabel)\nax.set_ylabel(ylabel) \nax.set_title(title)\nax.legend();\nKendrick plots are simply another representation of the same data. From the centroided m/z values we can compute the Kendrick mass and the Kendrick mass defect with the compute_kendrick_mass_and_defect() function.\nfrom kendrick import compute_kendrick_mass_and_defect\nmz_pos = df_total_pos['Centroided m/z'].values \ninty_pos = df_total_pos['Fractional intensity (%)']\nkm_pos, kmd_pos = compute_kendrick_mass_and_defect(mz_pos) \n\nmz_neg = df_total_neg['Centroided m/z'].values \ninty_neg = df_total_neg['Fractional intensity (%)']\nkm_neg, kmd_neg = compute_kendrick_mass_and_defect(mz_neg)\nfig, ax = plt.subplots(figsize=[12, 8]) \nthres_pos = 0.0001\ns_pos = 500\n\nthres_neg = 0.0001\ns_neg = 800\n\nax.set_ylim([-0.05, 0.6])\nax.set_xlim([0, 1200])\nax.scatter(km_neg[inty_neg &gt; thres_neg], kmd_neg[inty_neg &gt; thres_neg], s=s_neg*inty_neg[inty_neg &gt; thres_neg], alpha=0.8, color='royalblue', label='negative mode (-)')\nax.scatter(km_pos[inty_pos &gt; thres_pos], kmd_pos[inty_pos &gt; thres_pos], s=s_pos*inty_pos[inty_pos &gt; thres_pos], alpha=0.5, color='darkred', label='positive mode (+)')\n\nax.set_xlabel('Kendrick precise mass (KM)')\nax.set_ylabel('Kendrick mass defect (KMD)')\nax.set_title(f'Kendrick plot for {os.path.basename(raw_file)}')\nax.legend()\nThis Kendrick plot looks somewhat similar to the excel version by Wim. We need to figure out the reasons for these differences…",
     "crumbs": [
-      "Centroiding again"
+      "Plotting Kendrick plots"
     ]
   },
   {
-    "objectID": "centroiding-again.html#functions",
-    "href": "centroiding-again.html#functions",
-    "title": "Centroiding again",
-    "section": "FUNCTIONS",
-    "text": "FUNCTIONS\n\n\n\n\n  \n\n\n\nsource\n\ncentralize\n\ndef centralize(\n    df, mz_centroids, precision:float=0.002\n):\n\nShift mass points to centroid positions. \nKeep retention time dimension.",
+    "objectID": "plotting-kendrick-plots.html#functions",
+    "href": "plotting-kendrick-plots.html#functions",
+    "title": "Plotting Kendrick plots",
+    "section": "Functions",
+    "text": "Functions\n\nsource\n\ncompute_kendrick_mass_and_defect\n\ndef compute_kendrick_mass_and_defect(\n    mz, monomer:str='CH2', offset:float=0.6\n):\n\nCompute Kendrick precise mass for array mz. \nDefault monomer is ‘CH2’.\nIt is not clear to me why the offset by Wim is chosen 0.6.\nReurns: km, kmd",
     "crumbs": [
-      "Centroiding again"
-    ]
-  },
-  {
-    "objectID": "getting-started.html",
-    "href": "getting-started.html",
-    "title": "Getting started with Python",
-    "section": "",
-    "text": "In order to make full use of kendrick you need to be able to install Python packages and run Python code in Jupyter notebooks on your computer. The quickest and easiest way to get started with Jupyter notebooks is by downloading and installing the JupyterLab Desktop (JLD) installer for your operating system from the official github repository.\n\n\n\n\n\n\n\nNote\n\n\n\nThe first time you start JupyterLab Desktop you additionally need to install the default Python environment from the start menu. To do so you need to hoover and click on the word ‘install’ on the bottom of the start up screen.\n\n\nAre you running Jupyterlab Desktop on Linux or MacOS? In that case you also need to install mono via your package manager! For installation details see: pyRawTools.\nFinally you can install or update (with the -U option) the kendrick package from the Python Package index pypi.org by executing this command in a jupyter terminal:\npip install -U kendrick \nFor more information about JupyterLab Desktop see the JLD user guide.\nThat is it! You now are ready to open up your explore your high resolution mass spectrometry data!",
-    "crumbs": [
-      "Getting started with Python"
+      "Plotting Kendrick plots"
     ]
   },
   {
@@ -87,6 +77,36 @@
     "text": "FUNCTIONS\n\nsource\n\ninteractive_plot\n\ndef interactive_plot(\n    df, mz_hist, mz_centroids, title:NoneType=None\n):\n\nCreate interactive plot for dataframe df.\n\nsource\n\n\nget_time_averaged_centroids\n\ndef get_time_averaged_centroids(\n    mz_hist_w_xy\n):\n\nGet peaks (centroids) from histogram.\n\nsource\n\n\nhistogram\n\ndef histogram(\n    df\n):\n\nCreate intensity weighed histogram.\n\nsource\n\n\nread_mzml\n\ndef read_mzml(\n    mzml_file\n):\n\nRead mzml_file. \nReturns positive and negative mode dataframes df_pos and df_min.\n\nsource\n\n\nread_raw\n\ndef read_raw(\n    raw_file\n):\n\nRead raw_file into positive and negative mode data frames.",
     "crumbs": [
       "Exploring half a million molecules"
+    ]
+  },
+  {
+    "objectID": "getting-started.html",
+    "href": "getting-started.html",
+    "title": "Getting started with Python",
+    "section": "",
+    "text": "In order to make full use of kendrick you need to be able to install Python packages and run Python code in Jupyter notebooks on your computer. The quickest and easiest way to get started with Jupyter notebooks is by downloading and installing the JupyterLab Desktop (JLD) installer for your operating system from the official github repository.\n\n\n\n\n\n\n\nNote\n\n\n\nThe first time you start JupyterLab Desktop you additionally need to install the default Python environment from the start menu. To do so you need to hoover and click on the word ‘install’ on the bottom of the start up screen.\n\n\nAre you running Jupyterlab Desktop on Linux or MacOS? In that case you also need to install mono via your package manager! For installation details see: pyRawTools.\nFinally you can install or update (with the -U option) the kendrick package from the Python Package index pypi.org by executing this command in a jupyter terminal:\npip install -U kendrick \nFor more information about JupyterLab Desktop see the JLD user guide.\nThat is it! You now are ready to open up your explore your high resolution mass spectrometry data!",
+    "crumbs": [
+      "Getting started with Python"
+    ]
+  },
+  {
+    "objectID": "centroiding-again.html",
+    "href": "centroiding-again.html",
+    "title": "Centroiding again",
+    "section": "",
+    "text": "In the previous section we explained how to read the data contained in the Thermo .RAW file into dataframes and explore them in an interactive plot. At the highest resolution it became clear that the individual data points during the three minutes scan scatter around the vertical gray lines located at the maxima of their corresponding peaks in the time integrated mass histogram shown in the lower part of the figure. Reason for this scattering is the limited instrumental precision of the mass spectrometer. In order to proceed with our analysis we essentially need to horizontally move all points that are located within the instrumental precision onto these vertical gray lines. Confusingly the raw data was already centroided within each individual scan during the measurement. And now by horizontally shifting the masses to these histogram maxima we centroid the data again!\nfrom kendrick import histogram, get_time_averaged_centroids, interactive_plot, read_raw, centralize\nraw_file = '/home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Joana_100-24-1_01.RAW'\ndf_pos, df_neg = read_raw(raw_file)\n\nmz_hist = histogram(df_pos)\nmz_centroids = get_time_averaged_centroids(mz_hist)\nTo create a new dataframe with mass points that are aligned to the centroid lines use the centralize() function. For now we want to set the the option keep_time_dim=True to observe the horizontal shift of all points.\ndf_centr = centralize(df_pos, mz_centroids, keep_time_dim=True)\nLet’s now inspect this centroided dataframe in interactive plot below.\ninteractive_plot(df_centr, mz_hist, mz_centroids, title='Centroided Matt_Joana_100-24-1_01.RAW (+)')\nAt low resolution this plot looks quite similar to the original data. However, when zooming in one can observe that the mass points are now perfectly aligned with the grey centroid lines. By doing so we have increased the mass resolution of our data which means that we are ready to create Kendrick plots in the next section.",
+    "crumbs": [
+      "Centroiding again"
+    ]
+  },
+  {
+    "objectID": "centroiding-again.html#functions",
+    "href": "centroiding-again.html#functions",
+    "title": "Centroiding again",
+    "section": "FUNCTIONS",
+    "text": "FUNCTIONS\n\n\n\n\n  \n\n\n\nsource\n\ncentralize\n\ndef centralize(\n    df, precision:float=0.002, keep_time_dim:bool=False\n):\n\nShift mass points in dataframe df to centroid marker positions and discard outliers. \nIf keep_time_dim is True return dataframe with time dimension, otherwise sum intensities and return total intensity mass spectrum.",
+    "crumbs": [
+      "Centroiding again"
     ]
   },
   {

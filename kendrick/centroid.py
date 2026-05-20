@@ -7,12 +7,20 @@ __all__ = ['centralize']
 
 # %% ../notebooks/07_centroiding-again.ipynb #4ec6e619-e322-4bd2-956d-ef67977fc6c3
 from dask import array as da 
+import numpy as np 
+import pandas as pd
+
+from . import histogram, get_time_averaged_centroids
 
 # %% ../notebooks/07_centroiding-again.ipynb #85d7ce9a-9b3e-443a-a809-9022c059e0a7
-def centralize(df, mz_centroids, precision=0.002):
-    '''Shift mass points to centroid positions. 
-    
-    Keep retention time dimension.'''
+def centralize(df, precision=0.002, keep_time_dim=False):
+    '''Shift mass points in dataframe `df` to centroid marker positions and discard outliers.  
+
+    If `keep_time_dim` is True return dataframe with time dimension, 
+    otherwise sum intensities and return total intensity mass spectrum. '''
+
+    mz_hist = histogram(df)
+    mz_centroids = get_time_averaged_centroids(mz_hist)
     
     # extract numpy arrays from dataframe and centroids array 
     mz = df['mz'].values 
@@ -40,5 +48,29 @@ def centralize(df, mz_centroids, precision=0.002):
     
     # discard outliers
     df_centr = df_centr[is_nearby]
+
+    if keep_time_dim is False: 
+        # compute total summed int(ensit)y per centroid 
+        mz_arr = df_centr['mz'].values
+        intensities = df_centr['inty'].values
+        mz_unique = np.unique(mz_arr)
+        
+        centroids_totals = [] 
+        for mz in mz_unique: 
+            is_mz = mz_arr == mz 
+            tot = np.sum(intensities[is_mz])
+            centroids_totals.append([mz, tot])
+        
+        centroids_totals = np.array(centroids_totals)
+        centroids_mz, centroids_inty = centroids_totals.T
+        
+        # normalize tot percentages 
+        total_inty = np.sum(centroids_inty)
+        centroids_inty_perc = 100 * centroids_inty / total_inty 
+        
+        # combine into dataframe 
+        df_total_perc = pd.DataFrame({'Centroided m/z': centroids_mz, 'Fractional intensity (%)': centroids_inty_perc})
+
+        df_centr = df_total_perc 
 
     return df_centr

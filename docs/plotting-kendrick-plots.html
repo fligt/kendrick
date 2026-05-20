@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Up and running in 5 minutes…">
+<meta name="description" content="Can’t wait to make our first Kendrick plot!">
 
-<title>Getting started with Python – kendrick</title>
+<title>Plotting Kendrick plots – kendrick</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,8 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./exploring.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./libraries.html" rel="next">
+<link href="./centroiding-again.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -72,9 +106,12 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Getting started with Python – kendrick">
-<meta property="og:description" content="Up and running in 5 minutes…">
+<meta property="og:title" content="Plotting Kendrick plots – kendrick">
+<meta property="og:description" content="Can’t wait to make our first Kendrick plot!">
+<meta property="og:image" content="https://fligt.github.io/kendrick/08_plotting-kendrick-plots_files/figure-html/cell-3-output-1.png">
 <meta property="og:site_name" content="kendrick">
+<meta property="og:image:height" content="701">
+<meta property="og:image:width" content="999">
 </head>
 
 <body class="nav-sidebar floating nav-fixed">
@@ -110,7 +147,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./getting-started.html">Getting started with Python</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./plotting-kendrick-plots.html">Plotting Kendrick plots</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -130,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./getting-started.html" class="sidebar-item-text sidebar-link active">
+  <a href="./getting-started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Getting started with Python</span></a>
   </div>
 </li>
@@ -148,7 +185,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./plotting-kendrick-plots.html" class="sidebar-item-text sidebar-link">
+  <a href="./plotting-kendrick-plots.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Plotting Kendrick plots</span></a>
   </div>
 </li>
@@ -175,20 +212,29 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#functions" id="toc-functions" class="nav-link active" data-scroll-target="#functions">Functions</a>
+  <ul class="collapse">
+  <li><a href="#compute_kendrick_mass_and_defect" id="toc-compute_kendrick_mass_and_defect" class="nav-link" data-scroll-target="#compute_kendrick_mass_and_defect">compute_kendrick_mass_and_defect</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/fligt/kendrick/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Getting started with Python</h1>
+<h1 class="title">Plotting Kendrick plots</h1>
 </div>
 
 <div>
   <div class="description">
-    Up and running in 5 minutes…
+    Can’t wait to make our first Kendrick plot!
   </div>
 </div>
 
@@ -206,28 +252,102 @@ ul.task-list li input[type="checkbox"] {
 
 
 <!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
-<p>In order to make full use of <code>kendrick</code> you need to be able to install Python packages and run Python code in Jupyter notebooks on your computer. The quickest and easiest way to get started with Jupyter notebooks is by downloading and installing the JupyterLab Desktop (JLD) installer for your operating system from the <a href="https://github.com/jupyterlab/jupyterlab-desktop#installation">official github repository</a>.</p>
-<p><img src="https://github.com/jupyterlab/jupyterlab-desktop/raw/master/media/jupyterlab-desktop.png" class="img-fluid"></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p>Let’s see if we can now explore the mass spectral data in our cached raw file. However, before creating a Kendrick plot let’s take a look at the (centroided and time integrated) positive and negative mode mass spectra. This can be done conveniently with a bit of matplotlib code.</p>
+<div id="2400e726-d15e-4e09-805b-fa9214fcc5b2" class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> kendrick <span class="im">import</span> read_raw, centralize </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout-title-container flex-fill">
-Note
+<div id="d9bc7991-7941-4a72-8555-49a973ba7ef1" class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>raw_file <span class="op">=</span> <span class="st">'/home/frank/.cache/fairdatanow/asap-data/2025 Théo-Fany Lange - the dutch method/xcalibur raw data files/Matt_Joana_100-24-1_01.RAW'</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df_pos, df_neg <span class="op">=</span> read_raw(raw_file) </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df_total_pos <span class="op">=</span> centralize(df_pos)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df_total_neg <span class="op">=</span> centralize(df_neg)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span>plt.subplots(figsize<span class="op">=</span>[<span class="dv">12</span>, <span class="dv">8</span>])</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>xlabel, ylabel <span class="op">=</span> df_total_pos.columns</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>x_pos, y_pos <span class="op">=</span> df_total_pos.values.T</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>x_neg, y_neg <span class="op">=</span> df_total_neg.values.T</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>title <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>os<span class="sc">.</span>path<span class="sc">.</span>basename(raw_file)<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>ax.vlines(x_pos, np.zeros_like(y_pos), y_pos, color<span class="op">=</span><span class="st">'firebrick'</span>, label<span class="op">=</span><span class="st">'positive mode (+)'</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>ax.vlines(x_neg, <span class="op">-</span>y_neg, np.zeros_like(y_neg), color<span class="op">=</span><span class="st">'royalblue'</span>, label<span class="op">=</span><span class="st">'negative mode (-)'</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(xlabel)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(ylabel) </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>ax.set_title(title)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>ax.legend()<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08_plotting-kendrick-plots_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>The first time you start JupyterLab Desktop you additionally need to install the default Python environment from the start menu. <strong>To do so you need to hoover and click on the word ‘install’ on the bottom of the start up screen.</strong></p>
+</div>
+<p>Kendrick plots are simply another representation of the same data. From the centroided m/z values we can compute the Kendrick mass and the Kendrick mass defect with the <a href="https://fligt.github.io/kendrick/plotting-kendrick-plots.html#compute_kendrick_mass_and_defect"><code>compute_kendrick_mass_and_defect()</code></a> function.</p>
+<div id="6eca2db7-e5de-493e-9259-62c9e7d31fdb" class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> kendrick <span class="im">import</span> compute_kendrick_mass_and_defect</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="9697e531-4691-4c69-b5fc-d3ec0244d133" class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mz_pos <span class="op">=</span> df_total_pos[<span class="st">'Centroided m/z'</span>].values </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>inty_pos <span class="op">=</span> df_total_pos[<span class="st">'Fractional intensity (%)'</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>km_pos, kmd_pos <span class="op">=</span> compute_kendrick_mass_and_defect(mz_pos) </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>mz_neg <span class="op">=</span> df_total_neg[<span class="st">'Centroided m/z'</span>].values </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>inty_neg <span class="op">=</span> df_total_neg[<span class="st">'Fractional intensity (%)'</span>]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>km_neg, kmd_neg <span class="op">=</span> compute_kendrick_mass_and_defect(mz_neg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="57894295-3a34-48e5-974e-0c4faf2ff329" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>[<span class="dv">12</span>, <span class="dv">8</span>]) </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>thres_pos <span class="op">=</span> <span class="fl">0.0001</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>s_pos <span class="op">=</span> <span class="dv">500</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>thres_neg <span class="op">=</span> <span class="fl">0.0001</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>s_neg <span class="op">=</span> <span class="dv">800</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylim([<span class="op">-</span><span class="fl">0.05</span>, <span class="fl">0.6</span>])</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>ax.set_xlim([<span class="dv">0</span>, <span class="dv">1200</span>])</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>ax.scatter(km_neg[inty_neg <span class="op">&gt;</span> thres_neg], kmd_neg[inty_neg <span class="op">&gt;</span> thres_neg], s<span class="op">=</span>s_neg<span class="op">*</span>inty_neg[inty_neg <span class="op">&gt;</span> thres_neg], alpha<span class="op">=</span><span class="fl">0.8</span>, color<span class="op">=</span><span class="st">'royalblue'</span>, label<span class="op">=</span><span class="st">'negative mode (-)'</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>ax.scatter(km_pos[inty_pos <span class="op">&gt;</span> thres_pos], kmd_pos[inty_pos <span class="op">&gt;</span> thres_pos], s<span class="op">=</span>s_pos<span class="op">*</span>inty_pos[inty_pos <span class="op">&gt;</span> thres_pos], alpha<span class="op">=</span><span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'darkred'</span>, label<span class="op">=</span><span class="st">'positive mode (+)'</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Kendrick precise mass (KM)'</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Kendrick mass defect (KMD)'</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f'Kendrick plot for </span><span class="sc">{</span>os<span class="sc">.</span>path<span class="sc">.</span>basename(raw_file)<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>ax.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="08_plotting-kendrick-plots_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
-<p><strong>Are you running Jupyterlab Desktop on Linux or MacOS? In that case you also need to install <code>mono</code> via your package manager! For installation details see: <a href="https://pypi.org/project/pyRawTools/">pyRawTools</a>.</strong></p>
-<p>Finally you can install or update (with the <code>-U</code> option) the <code>kendrick</code> package from the Python Package index <a href="https://pypi.org/project/kendrick/">pypi.org</a> by executing <a href="https://github.com/jupyterlab/jupyterlab-desktop/blob/master/user-guide.md#installing-new-python-packages">this command</a> in a jupyter terminal:</p>
-<pre><code>pip install -U kendrick </code></pre>
-<p>For more information about JupyterLab Desktop see the <a href="https://github.com/jupyterlab/jupyterlab-desktop/blob/master/user-guide.md">JLD user guide</a>.</p>
-<p><strong>That is it! You now are ready to open up your explore your high resolution mass spectrometry data!</strong></p>
+</div>
+<p>This Kendrick plot looks somewhat similar to the excel version by Wim. We need to figure out the reasons for these differences…</p>
+<section id="functions" class="level2">
+<h2 class="anchored" data-anchor-id="functions">Functions</h2>
+<hr>
+<p><a href="https://github.com/fligt/kendrick/blob/master/kendrick/kendrick_plot.py#L17" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="compute_kendrick_mass_and_defect" class="level3">
+<h3 class="anchored" data-anchor-id="compute_kendrick_mass_and_defect">compute_kendrick_mass_and_defect</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_kendrick_mass_and_defect(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    mz, monomer:<span class="bu">str</span><span class="op">=</span><span class="st">'CH2'</span>, offset:<span class="bu">float</span><span class="op">=</span><span class="fl">0.6</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>):</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><em>Compute Kendrick precise mass for array <code>mz</code>. </em></p>
+<p>Default <code>monomer</code> is ‘CH2’.</p>
+<p>It is not clear to me why the offset by Wim is chosen 0.6.</p>
+<p>Reurns: km, kmd</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -649,13 +769,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Welcome to kendrick">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Welcome to kendrick</span>
+      <a href="./centroiding-again.html" class="pagination-link" aria-label="Centroiding again">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Centroiding again</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./exploring.html" class="pagination-link" aria-label="Exploring half a million molecules">
-        <span class="nav-page-text">Exploring half a million molecules</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./libraries.html" class="pagination-link" aria-label="Python for High Resolution Mass Spectrometry">
+        <span class="nav-page-text">Python for High Resolution Mass Spectrometry</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -664,4 +784,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/fligt/kendrick/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/fligt/kendrick/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
